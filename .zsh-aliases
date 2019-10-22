@@ -9,3 +9,12 @@ alias dc="docker-compose"
 alias k="kubectl"
 alias ack-grep="ack"
 alias cy="yarn cy:open"
+
+kill_port() {
+  if [ -n "$1" ]
+  then
+    lsof -ti :"$1" | xargs kill
+  else
+    echo "Pass in port number."
+  fi
+}
