@@ -30,7 +30,8 @@ if Dir.exists? path("/usr/local/Cellar/the_silver_searcher/")
   print_green "You already have ag, awesome!"
 else
   print_red "Nope, installing ag"
-  `brew install the_silver_searcher`
+  # `brew install the_silver_searcher`
+  `sudo apt-get install silversearcher-ag`
 end
 
 print_cyan "Checking if zsh is installed"
@@ -42,22 +43,19 @@ else
   print_green "You already have zsh, awesome!"
 end
 
-print_cyan "Checking if honukai theme is installed"
-if File.exists? path("~/.oh-my-zsh/themes/honukai.zsh-theme")
-  print_green "You already have honukai theme, awesome!"
+print_cyan "Checking if ngaicojal theme is installed"
+if File.exists? path("~/.oh-my-zsh/themes/ngaicojal.zsh-theme")
+  print_green "You already have ngaicojal theme, awesome!"
 else
-  print_red "Nope, installing honukai theme"
-  `wget -P ~/.oh-my-zsh/themes "https://raw.githubusercontent.com/oskarkrawczyk/honukai-iterm/master/honukai.zsh-theme"`
+  print_red "Nope, installing ngaicojal theme..."
+  `cp -i zsh/themes/ngaicojal.zsh-theme ~/.oh-my-zsh/themes`
 end
 
-print_cyan "Copying .vimrc to ~/.vimrc"
-`cp -i .vimrc ~/.vimrc`
+print_cyan "Copying vimrc to ~/.vimrc"
+`cp -i vimrc ~/.vimrc`
 print_cyan "Copying .gitconfig to ~/.gitconfig"
 `cp -i .gitconfig ~/.gitconfig`
-print_cyan "Copying .zsh-aliases to ~/.zsh-aliases"
-`cp -i .zsh-aliases ~/.zsh-aliases`
-
-if File.readlines(path("~/.zshrc")).grep(/zsh-aliases/).size == 0
-  print_cyan "Adding .zsh-aliases to ~/.zshrc"
-  `echo "source ~/.zsh-aliases" >> ~/.zshrc`
-end
+print_cyan "Copying zsh/zshrc to ~/.zshrc"
+`cp -i zsh/zshrc ~/.zshrc`
+print_cyan "Copying gemrc"
+`cp -i gemrc ~/.gemrc`

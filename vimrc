@@ -26,10 +26,27 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'           " Set up fzf and fzf.vim
 
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'tomasr/molokai'
+
+" File browser
+Plug 'preservim/nerdTree' 						" File browser
+Plug 'Xuyuanp/nerdtree-git-plugin' 				" Git status
+Plug 'ryanoasis/vim-devicons' 					" Icon
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'unkiwii/vim-nerdtree-sync' 				" Sync current file
+
+" Commenter
+Plug 'preservim/nerdcommenter'
+Plug 'slim-template/vim-slim'
 
 " All of your Plugins must be added before the following line
 call plug#end()              " required
 filetype plugin indent on    " required
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
 " Leader key is SPACE, I find it the best
 let mapleader = " "
@@ -145,7 +162,7 @@ nnoremap <leader>rn :set relativenumber!<cr>
 " If fzf installed using git
 set rtp+=~/.fzf
 " Map fzf search to CTRL P
-nnoremap <C-p> :GFiles<Cr>
+nnoremap <C-p> :Files<Cr>
 " Map fzf + ag search to CTRL P
 nnoremap <C-g> :Ag <Cr>
 
@@ -206,9 +223,19 @@ augroup END
 " Fix syntax highlight for Coc plugin floating errors
 hi CocErrorFloat guifg=Magenta guibg=Magenta
 
-" Use templates https://vimtricks.com/p/automated-file-templates/
-autocmd BufNewFile *.test.tsx        0r ~/Documents/dotfiles/skeletons/react-typescript.test.tsx
-autocmd BufNewFile *\(test\)\@<!.tsx 0r ~/Documents/dotfiles/skeletons/react-typescript.tsx
-autocmd BufNewFile *content/blog*.md 0r ~/Documents/dotfiles/skeletons/blog-post.md
-autocmd BufNewFile *.sh              0r ~/Documents/dotfiles/skeletons/script.sh
-autocmd BufNewFile *.html            0r ~/Documents/dotfiles/skeletons/page.html
+" Theme
+colorscheme molokai
+set encoding=UTF-8
+
+" strip trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Nerdtree open by default
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+let NERDTreeQuitOnOpen = 0
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/

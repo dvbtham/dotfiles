@@ -27,3 +27,20 @@ kill_port() {
     echo "Pass in port number."
   fi
 }
+
+# Path to your oh-my-zsh configuration.
+ZSH=$HOME/.oh-my-zsh
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+ZSH_THEME="ngaicojal"
+
+plugins=(asdf git ruby zsh-nvm)
+
+source $ZSH/oh-my-zsh.sh
+export EDITOR="vim"
+export PATH="/usr/local/bin:$PATH"
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash

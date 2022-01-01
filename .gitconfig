@@ -1,9 +1,6 @@
 [user]
-  name  = Nikola Đuza
-  email = nikolaseap@gmail.com
-
-[credential]
-  helper = GIT_CREDENTIAL_HELPER
+  name  = Tham
+  email = thamdv96@gmail.com
 
 [alias]
   a    = add
@@ -60,9 +57,6 @@
 
 [push]
   default = current
-
-[commit]
-  gpgsign = true
 
 [diff]
   colorMoved = default
