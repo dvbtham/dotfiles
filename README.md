@@ -18,7 +18,7 @@ Get started quickly:
 1. Clone the repo
 
    ```bash
-   git clone https://github.com/nikolalsvk/dotfiles.git
+   git clone https://github.com/dvbtham/dotfiles.git
    ```
 
 2. Get into the repo and run the install script
