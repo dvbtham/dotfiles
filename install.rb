@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require './os.rb'
 
 def print_cyan(text)
   puts "\e[36m#{text}\e[0m"
@@ -30,17 +31,29 @@ if Dir.exists? path("/usr/local/Cellar/the_silver_searcher/")
   print_green "You already have ag, awesome!"
 else
   print_red "Nope, installing ag"
-  # `brew install the_silver_searcher`
-  `sudo apt-get install silversearcher-ag`
+  if OS.mac?
+    `brew install the_silver_searcher`
+  else
+    `sudo apt-get install silversearcher-ag`
+  end
 end
 
 print_cyan "Checking if zsh is installed"
 if `which zsh`.include? "not found"
   print_red "Nope, installing zsh"
-  `sudo apt-get install zsh`
-  `sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"`
+  `sudo apt-get install zsh` if OS.linux?
+  `brew install zsh` if OS.mac?
 else
   print_green "You already have zsh, awesome!"
+end
+
+print_cyan "Checking if oh-my-zsh is installed"
+if File.exists? path("~/.oh-my-zsh")
+  print_green "You already have oh-my-zsh, awesome!"
+else
+  print_red "Nope, installing oh-my-zsh..."
+  `sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
+  `git clone git://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions`
 end
 
 print_cyan "Checking if ngaicojal theme is installed"
