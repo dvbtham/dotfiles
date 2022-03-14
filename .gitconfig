@@ -5,7 +5,8 @@
 [alias]
   a    = add
   all  = add -A
-  st   = status -sb
+  sts  = status -sb
+  st   = status
   ci   = commit -m
   ca   = commit --amend
   br   = branch
@@ -30,9 +31,6 @@
   cln  = !git branch | grep -v 'master' | xargs git branch -D
 
 [color]
-  diff   = auto
-  status = auto
-  branch = auto
   ui     = true
 
 [core]
